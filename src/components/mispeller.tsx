@@ -1,5 +1,9 @@
 import React from 'react';
 import {misspellText} from '../libs/TextMisspeller'
+import { Button } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import { Paper } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 
 interface IMispelerProps {
     initialText : string
@@ -23,25 +27,28 @@ export class Mispeler extends React.Component<IMispelerProps, IMispelerState> {
 
   render() {
     return (
-      <div>
-        <h3>MISPEL!</h3>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="new-todo">
-            What text needs to change?
-          </label>
-          <input
-            id="new-todo"
-            onChange={this.handleChange}
-            value={this.state.inputText}
-          />
-          <button>
-            Mispel
-          </button>
-          <p>
-          {this.state.mispeledText}
-          </p>
-        </form>
-      </div>
+      <Container maxWidth="md">
+        <Paper>
+          <h3>MISPEL!</h3>
+          <form onSubmit={this.handleSubmit}>
+            <TextField
+              id="outlined-multiline-static"
+              label="What text needs to change?"
+              multiline
+              rows={6}
+              fullWidth
+              variant="outlined"
+              value={this.state.inputText}
+              onChange={this.handleChange}
+            />
+            <br/>
+            <Button variant="contained" onClick={() => { this.changeTheText(); }}>Mispel</Button>
+            <p>
+              {this.state.mispeledText}
+            </p>
+          </form>
+        </Paper>
+      </Container>
     );
   }
 
@@ -51,6 +58,10 @@ export class Mispeler extends React.Component<IMispelerProps, IMispelerState> {
 
   handleSubmit(e : any) {
     e.preventDefault();
+    this.changeTheText();
+  }
+
+  changeTheText(){
     if (this.state.inputText.length === 0) {
       return;
     }
