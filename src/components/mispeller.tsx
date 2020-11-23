@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {misspellText} from '../libs/TextMisspeller'
 
 interface IMispelerProps {
     initialText : string
@@ -56,7 +56,7 @@ export class Mispeler extends React.Component<IMispelerProps, IMispelerState> {
     }
     this.setState(state => ({
       inputText: "",
-      mispeledText: this.state.inputText + " wrong"
+      mispeledText: misspellText(this.state.inputText)
     }));
   }
 }

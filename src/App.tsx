@@ -1,7 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import { TodoList } from './components/todoList'
+// import { TodoList } from './components/todoList'
 import { Mispeler } from './components/mispeller';
 
 interface IAppProps {
