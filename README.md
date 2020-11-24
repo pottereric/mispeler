@@ -1,5 +1,5 @@
 # TODO #
-* do the vowel switching before the letter count changes
+* investigate doubling the final letter
 
 # Getting Started with Create React App
 

@@ -25,10 +25,10 @@ describe("misspellWord", () =>{
     expect(misspelledWord).toBe("freind")
   })
 
-  // test("calendar should become calender", () => {
-  //   let misspelledWord = misspellWord("calendar");
-  //   expect(misspelledWord).toBe("calender")
-  // })
+  test("calendar should become calender", () => {
+    let misspelledWord = misspellWord("calendar");
+    expect(misspelledWord).toBe("calender")
+  })
 
   test("independent should become independant", () => {
     let misspelledWord = misspellWord("independent");
