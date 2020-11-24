@@ -4,7 +4,7 @@ export function misspellText(text : string) : string {
     return missspelledWords.join(' ');
   }
   
-  function misspellWord(word : string) : string {
+export function misspellWord(word : string) : string {
     let a = word.charAt(0);
     let b = word.charAt(1);
     let remaining = word.substring(2);
