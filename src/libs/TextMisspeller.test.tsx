@@ -50,6 +50,11 @@ describe("misspellWord", () =>{
     expect(misspelledWord).toBe("sisster")
   })
 
+  test("their should become there - switch homophones", () => {
+    let misspelledWord = misspellWord("their");
+    expect(misspelledWord).toBe("there")
+  })
+
 //   test("across should not become accross - don't double the last s", () => {
 //     let misspelledWord = misspellWord("across");
 //     expect(misspelledWord).toBe("accross")

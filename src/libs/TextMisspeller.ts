@@ -13,13 +13,28 @@ export function misspellWord(word: string): string {
   let a = word.charAt(0);
   let b = word.charAt(1);
   let remaining = word.substring(2);
-  let firstSetOfChanges = changeChunks(true, a, b, remaining);
-  if (firstSetOfChanges.numberOfChanges === 0){
-    return changeNumberOfRepeatableConsonants(true, a, b, remaining).resultingWord;
+  let firstSetOfChanges = switchHomonyms(true, word);
+  if (firstSetOfChanges.numberOfChanges === 1){
+    return firstSetOfChanges.resultingWord;
   }
-  return firstSetOfChanges.resultingWord;
+  let secondSetOfChanges = changeChunks(true, a, b, remaining);
+  if (secondSetOfChanges.numberOfChanges === 1){
+    return secondSetOfChanges.resultingWord;
+  }
+  return changeNumberOfRepeatableConsonants(true, a, b, remaining).resultingWord;
 }
 
+function switchHomonyms(isFirst : boolean, word : string) : wordChangeResult {
+  if(word == "their") return {numberOfChanges: 1, resultingWord: "there"};
+  if(word == "there") return {numberOfChanges: 1, resultingWord: "their"};
+  if(word == "flare") return {numberOfChanges: 1, resultingWord: "flair"};
+  if(word == "flair") return {numberOfChanges: 1, resultingWord: "flare"};
+  if(word == "accept") return {numberOfChanges: 1, resultingWord: "except"};
+  if(word == "except") return {numberOfChanges: 1, resultingWord: "accept"};
+  if(word == "where") return {numberOfChanges: 1, resultingWord: "wear"};
+  if(word == "wear") return {numberOfChanges: 1, resultingWord: "where"};
+  return {numberOfChanges: 0, resultingWord: word};
+}
 function changeChunks(isFirst: boolean, a: string, b: string, remaining: string): wordChangeResult {
 
   if (b === "") {
