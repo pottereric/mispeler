@@ -13,13 +13,17 @@ export function misspellWord(word: string): string {
   let a = word.charAt(0);
   let b = word.charAt(1);
   let remaining = word.substring(2);
-  let firstSetOfChanges = switchHomonyms(true, word);
-  if (firstSetOfChanges.numberOfChanges === 1){
-    return firstSetOfChanges.resultingWord;
+  let setOfChanges = switchHomonyms(true, word);
+  if (setOfChanges.numberOfChanges === 1){
+    return setOfChanges.resultingWord;
   }
-  let secondSetOfChanges = changeChunks(true, a, b, remaining);
-  if (secondSetOfChanges.numberOfChanges === 1){
-    return secondSetOfChanges.resultingWord;
+  setOfChanges = changeChunksComplex(true, a, b, remaining);
+  if (setOfChanges.numberOfChanges === 1){
+    return setOfChanges.resultingWord;
+  }
+  setOfChanges = changeChunksSimple(true, a, b, remaining);
+  if (setOfChanges.numberOfChanges === 1){
+    return setOfChanges.resultingWord;
   }
   return changeNumberOfRepeatableConsonants(true, a, b, remaining).resultingWord;
 }
@@ -33,9 +37,34 @@ function switchHomonyms(isFirst : boolean, word : string) : wordChangeResult {
   if(word == "except") return {numberOfChanges: 1, resultingWord: "accept"};
   if(word == "where") return {numberOfChanges: 1, resultingWord: "wear"};
   if(word == "wear") return {numberOfChanges: 1, resultingWord: "where"};
+  if(word == "right") return {numberOfChanges: 1, resultingWord: "write"};
+  if(word == "write") return {numberOfChanges: 1, resultingWord: "right"};
   return {numberOfChanges: 0, resultingWord: word};
 }
-function changeChunks(isFirst: boolean, a: string, b: string, remaining: string): wordChangeResult {
+function changeChunksComplex(isFirst: boolean, a: string, b: string, remaining: string): wordChangeResult {
+
+  if (b === "") {
+    return { numberOfChanges: 0, resultingWord: a + b};
+  }
+  else if (a === "e" && b === "n" && remaining.charAt(0) === "t") {
+    return { numberOfChanges: 1, resultingWord: "an" + remaining};
+  }
+  else if (a === "a" && b === "n" && remaining.charAt(0) === "c") {
+    return { numberOfChanges: 1, resultingWord: "en" + remaining};
+  }
+  else if (a === "e" && b === "r" && remaining.charAt(0) === "y") {
+    return { numberOfChanges: 1, resultingWord: "ar" + remaining};
+  }
+
+  let bb = remaining.charAt(0);
+  let remaining2 = remaining.substring(1);
+
+  let recurseResult = changeChunksComplex(false, b, bb, remaining2);
+  return { numberOfChanges: recurseResult.numberOfChanges,
+            resultingWord: a + recurseResult.resultingWord}; 
+}
+
+function changeChunksSimple(isFirst: boolean, a: string, b: string, remaining: string): wordChangeResult {
 
   if (b === "") {
     return { numberOfChanges: 0, resultingWord: a + b};
@@ -49,14 +78,11 @@ function changeChunks(isFirst: boolean, a: string, b: string, remaining: string)
   else if (a === "a" && b === "r") {
     return { numberOfChanges: 1, resultingWord: "er" + remaining};
   }
-  else if (a === "e" && b === "n" && remaining.charAt(0) === "t") {
-    return { numberOfChanges: 1, resultingWord: "an" + remaining};
-  }
 
   let bb = remaining.charAt(0);
   let remaining2 = remaining.substring(1);
 
-  let recurseResult = changeChunks(false, b, bb, remaining2);
+  let recurseResult = changeChunksSimple(false, b, bb, remaining2);
   return { numberOfChanges: recurseResult.numberOfChanges,
             resultingWord: a + recurseResult.resultingWord}; 
 }

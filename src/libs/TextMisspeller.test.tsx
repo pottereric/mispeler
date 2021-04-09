@@ -44,7 +44,16 @@ describe("misspellWord", () =>{
     let misspelledWord = misspellWord("finally");
     expect(misspelledWord).toBe("finaly")
   })
-  
+
+  test("appearance should become appearence", () => {
+    let misspelledWord = misspellWord("appearance");
+    expect(misspelledWord).toBe("appearence")
+  })
+  // test("category should become catagory", () => {
+  //   let misspelledWord = misspellWord("category");
+  //   expect(misspelledWord).toBe("catagory")
+  // })
+   
   test("across should become sisster - double the s", () => {
     let misspelledWord = misspellWord("sister");
     expect(misspelledWord).toBe("sisster")
