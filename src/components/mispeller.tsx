@@ -29,11 +29,11 @@ export class Mispeler extends React.Component<IMispelerProps, IMispelerState> {
     return (
       <Container maxWidth="md">
         <Paper>
-          <h3>MISPEL!</h3>
+          <h3>drunkentoddlebrokenkeyboard.com</h3>
           <form onSubmit={this.handleSubmit}>
             <TextField
               id="outlined-multiline-static"
-              label="What text needs to change?"
+              label="type your words"
               multiline
               rows={6}
               fullWidth
@@ -42,7 +42,7 @@ export class Mispeler extends React.Component<IMispelerProps, IMispelerState> {
               onChange={this.handleChange}
             />
             <br/>
-            <Button variant="contained" onClick={() => { this.changeTheText(); }}>Mispel</Button>
+            <Button variant="contained" onClick={() => { this.changeTheText(); }}>Go</Button>
             <p>
               {this.state.mispeledText}
             </p>

@@ -16,7 +16,7 @@ class App extends React.Component<IAppProps, IAppState> {
     return (
       <div>
         {/* <TodoList initialText="baz" /> */}
-        <Mispeler initialText="this is the input" />
+        <Mispeler initialText="" />
       </div>
     );
   }
