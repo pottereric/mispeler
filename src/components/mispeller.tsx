@@ -29,7 +29,7 @@ export class Mispeler extends React.Component<IMispelerProps, IMispelerState> {
     return (
       <Container maxWidth="md">
         <Paper>
-          <h3>drunkentoddlebrokenkeyboard.com</h3>
+          <h3>drunkentoddlerbrokenkeyboard.com</h3>
           <form onSubmit={this.handleSubmit}>
             <TextField
               id="outlined-multiline-static"
