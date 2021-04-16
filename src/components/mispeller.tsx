@@ -48,6 +48,7 @@ export class Mispeler extends React.Component<IMispelerProps, IMispelerState> {
             </p>
           </form>
         </Paper>
+        <a href="http://humbletoolsmith.com/2021/04/16/what-is-the-opposite-of-a-spell-checker/" >Why?</a>
       </Container>
     );
   }
